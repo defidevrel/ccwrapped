@@ -38,19 +38,29 @@ export function CardStack({ payload, slug }: CardStackProps) {
   const [direction, setDirection] = useState(1);
   const totalCards = CARD_KEYS.length;
 
+  const haptic = useCallback((style: "light" | "medium") => {
+    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+      navigator.vibrate(style === "light" ? 5 : 12);
+    }
+  }, []);
+
   const goNext = useCallback(() => {
     if (currentIndex < totalCards - 1) {
       setDirection(1);
       setCurrentIndex((i) => i + 1);
+      haptic("light");
     }
-  }, [currentIndex, totalCards]);
+  }, [currentIndex, totalCards, haptic]);
 
   const goPrev = useCallback(() => {
     if (currentIndex > 0) {
       setDirection(-1);
       setCurrentIndex((i) => i - 1);
+      haptic("light");
+    } else {
+      haptic("medium");
     }
-  }, [currentIndex]);
+  }, [currentIndex, haptic]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent): void {
@@ -129,10 +139,7 @@ export function CardStack({ payload, slug }: CardStackProps) {
       </div>
 
       {/* Card area */}
-      <div
-        className="relative flex-1 cursor-pointer overflow-hidden"
-        onClick={goNext}
-      >
+      <div className="relative flex-1 overflow-hidden">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={CARD_KEYS[currentIndex]}
@@ -150,6 +157,18 @@ export function CardStack({ payload, slug }: CardStackProps) {
             {renderCard(CARD_KEYS[currentIndex])}
           </motion.div>
         </AnimatePresence>
+
+        {/* Tap zones: left half goes back, right half goes forward */}
+        <div className="absolute inset-0 z-10 flex">
+          <div
+            className="h-full w-1/3 cursor-pointer"
+            onClick={goPrev}
+          />
+          <div
+            className="h-full flex-1 cursor-pointer"
+            onClick={goNext}
+          />
+        </div>
       </div>
 
       {/* Navigation */}
@@ -167,7 +186,7 @@ export function CardStack({ payload, slug }: CardStackProps) {
             ← PREV
           </Button>
           <span className="font-mono text-xs text-text-muted">
-            tap or →
+            ← tap left · tap right →
           </span>
           <Button
             variant="terminal"
