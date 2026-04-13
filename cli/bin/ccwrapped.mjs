@@ -48,44 +48,99 @@ function toDateStr(ts) {
   return new Date(ts).toISOString().split("T")[0];
 }
 
+const AVG_MINUTES_PER_MESSAGE = 1.5;
+
 // ── Step 1: Discover session files ───────────────────────────────────────────
 
 function discoverSessionFiles() {
   const claudeDir = join(homedir(), ".claude", "projects");
-  if (!existsSync(claudeDir)) {
-    console.error(`\n  ✗ Could not find ${claudeDir}`);
-    console.error(`    Make sure you have Claude Code installed and have used it at least once.\n`);
+  const cursorDir = join(homedir(), ".cursor", "projects");
+  const claudeExists = existsSync(claudeDir);
+  const cursorExists = existsSync(cursorDir);
+
+  if (!claudeExists && !cursorExists) {
+    console.error(`\n  ✗ Could not find session data.`);
+    console.error(`    Checked: ~/.claude/projects and ~/.cursor/projects`);
+    console.error(`    Make sure you have Claude Code or Cursor installed and have used it at least once.\n`);
     process.exit(1);
   }
 
   const files = [];
 
-  function walk(dir, depth) {
-    if (depth > 3) return;
-    let entries;
-    try { entries = readdirSync(dir, { withFileTypes: true }); }
-    catch { return; }
+  // Claude Code: ~/.claude/projects/**/*.jsonl (excluding agent-*)
+  if (claudeExists) {
+    function walkClaude(dir, depth) {
+      if (depth > 3) return;
+      let entries;
+      try { entries = readdirSync(dir, { withFileTypes: true }); }
+      catch { return; }
 
-    for (const entry of entries) {
-      const full = join(dir, entry.name);
-      if (entry.isDirectory()) {
-        walk(full, depth + 1);
-      } else if (
-        entry.name.endsWith(".jsonl") &&
-        !entry.name.startsWith("agent-")
-      ) {
-        files.push(full);
+      for (const entry of entries) {
+        const full = join(dir, entry.name);
+        if (entry.isDirectory()) {
+          walkClaude(full, depth + 1);
+        } else if (
+          entry.name.endsWith(".jsonl") &&
+          !entry.name.startsWith("agent-")
+        ) {
+          files.push({ path: full, source: "claude" });
+        }
       }
     }
+    walkClaude(claudeDir, 0);
   }
 
-  walk(claudeDir, 0);
+  // Cursor: ~/.cursor/projects/*/agent-transcripts/*/*.jsonl (excluding subagents)
+  if (cursorExists) {
+    try {
+      const projectDirs = readdirSync(cursorDir, { withFileTypes: true })
+        .filter((e) => e.isDirectory());
+
+      for (const proj of projectDirs) {
+        const transcriptsDir = join(cursorDir, proj.name, "agent-transcripts");
+        if (!existsSync(transcriptsDir)) continue;
+
+        let sessions;
+        try { sessions = readdirSync(transcriptsDir, { withFileTypes: true }); }
+        catch { continue; }
+
+        for (const sess of sessions) {
+          if (!sess.isDirectory()) continue;
+          const sessDir = join(transcriptsDir, sess.name);
+          if (sessDir.includes("subagents")) continue;
+
+          let jsonlFiles;
+          try { jsonlFiles = readdirSync(sessDir); }
+          catch { continue; }
+
+          for (const fn of jsonlFiles) {
+            if (fn.endsWith(".jsonl")) {
+              files.push({ path: join(sessDir, fn), source: "cursor" });
+            }
+          }
+        }
+      }
+    } catch { /* ignore */ }
+  }
+
   return files;
 }
 
 // ── Step 2 & 3: Parse sessions ───────────────────────────────────────────────
 
-function parseSession(filepath) {
+function extractMessageText(msg) {
+  if (!msg || !msg.content) return "";
+  if (typeof msg.content === "string") return msg.content;
+  if (Array.isArray(msg.content)) {
+    return msg.content
+      .filter((b) => b.type === "text")
+      .map((b) => b.text)
+      .join(" ");
+  }
+  return "";
+}
+
+function parseClaudeSession(filepath) {
   let content;
   try { content = readFileSync(filepath, "utf-8"); }
   catch { return null; }
@@ -113,18 +168,8 @@ function parseSession(filepath) {
 
     if (type === "user" && !entry.isMeta) {
       userMessages++;
-      const msg = entry.message;
-      if (msg && msg.content) {
-        const text = typeof msg.content === "string"
-          ? msg.content
-          : Array.isArray(msg.content)
-            ? msg.content
-                .filter((b) => b.type === "text")
-                .map((b) => b.text)
-                .join(" ")
-            : "";
-        if (text) userMessageTexts.push(text.toLowerCase());
-      }
+      const text = extractMessageText(entry.message);
+      if (text) userMessageTexts.push(text.toLowerCase());
     }
 
     if (type === "assistant" && entry.message && Array.isArray(entry.message.content)) {
@@ -173,6 +218,78 @@ function parseSession(filepath) {
     linesChanged,
     userMessageTexts,
   };
+}
+
+function parseCursorSession(filepath) {
+  let content;
+  try { content = readFileSync(filepath, "utf-8"); }
+  catch { return null; }
+
+  const lines = content.split("\n").filter(Boolean);
+  let userMessages = 0;
+  let totalEntries = 0;
+  const toolCounts = {};
+  let gitCommits = 0;
+  let linesChanged = 0;
+  const userMessageTexts = [];
+
+  for (const line of lines) {
+    let entry;
+    try { entry = JSON.parse(line); }
+    catch { continue; }
+
+    const role = entry.role;
+    if (!role) continue;
+    totalEntries++;
+
+    if (role === "user") {
+      userMessages++;
+      const text = extractMessageText(entry.message);
+      if (text) userMessageTexts.push(text.toLowerCase());
+    }
+
+    if (role === "assistant" && entry.message && Array.isArray(entry.message.content)) {
+      for (const block of entry.message.content) {
+        if (block.type === "tool_use") {
+          const name = block.name || "unknown";
+          toolCounts[name] = (toolCounts[name] || 0) + 1;
+
+          if ((name === "Shell" || name === "Bash") && block.input) {
+            const cmd = block.input.command || "";
+            if (cmd.includes("git commit")) gitCommits++;
+          }
+        }
+      }
+    }
+  }
+
+  if (totalEntries < MIN_SESSION_ENTRIES) return null;
+
+  // Cursor transcripts lack timestamps — use file mtime as session date
+  // and estimate duration from message count
+  let fileMtime;
+  try { fileMtime = statSync(filepath).mtimeMs; }
+  catch { return null; }
+
+  const estimatedMinutes = totalEntries * AVG_MINUTES_PER_MESSAGE;
+  if (estimatedMinutes < 1) return null;
+
+  return {
+    startTime: fileMtime,
+    endTime: fileMtime,
+    durationMinutes: estimatedMinutes,
+    userMessages,
+    toolCounts,
+    gitCommits,
+    linesChanged,
+    userMessageTexts,
+  };
+}
+
+function parseSession(filepath, source) {
+  return source === "cursor"
+    ? parseCursorSession(filepath)
+    : parseClaudeSession(filepath);
 }
 
 // ── Step 4: Aggregate ────────────────────────────────────────────────────────
@@ -289,13 +406,16 @@ function aggregate(sessions) {
     }
   }
 
-  // Project count
-  const claudeDir = join(homedir(), ".claude", "projects");
-  let projectCount = 0;
-  try {
-    projectCount = readdirSync(claudeDir, { withFileTypes: true })
-      .filter((e) => e.isDirectory()).length;
-  } catch { /* ignore */ }
+  // Project count (from both Claude Code and Cursor)
+  const projectDirs = new Set();
+  for (const base of [join(homedir(), ".claude", "projects"), join(homedir(), ".cursor", "projects")]) {
+    try {
+      for (const e of readdirSync(base, { withFileTypes: true })) {
+        if (e.isDirectory()) projectDirs.add(e.name);
+      }
+    } catch { /* ignore */ }
+  }
+  const projectCount = projectDirs.size;
 
   return {
     stats: {
@@ -441,19 +561,25 @@ function openBrowser(url) {
 async function main() {
   console.log("");
   console.log(purple("  ╔═══════════════════════════════════╗"));
-  console.log(purple("  ║") + bold("   Claude Code Wrapped              ") + purple("║"));
+  console.log(purple("  ║") + bold("   Code Wrapped                     ") + purple("║"));
   console.log(purple("  ╚═══════════════════════════════════╝"));
   console.log("");
 
-  log("Scanning your Claude Code sessions...");
+  log("Scanning your coding sessions...");
   log(dim("Only aggregate stats are collected — no code, prompts, or file paths leave your machine.\n"));
 
   // Step 1: Discover
   const files = discoverSessionFiles();
-  log(`Found ${bold(files.length.toString())} session files`);
+  const claudeCount = files.filter((f) => f.source === "claude").length;
+  const cursorCount = files.filter((f) => f.source === "cursor").length;
+
+  const sources = [];
+  if (claudeCount > 0) sources.push(`${claudeCount} Claude Code`);
+  if (cursorCount > 0) sources.push(`${cursorCount} Cursor`);
+  log(`Found ${bold(files.length.toString())} session files (${sources.join(", ")})`);
 
   if (files.length === 0) {
-    console.error("\n  ✗ No session files found. Use Claude Code first, then run this again.\n");
+    console.error("\n  ✗ No session files found. Use Claude Code or Cursor first, then run this again.\n");
     process.exit(1);
   }
 
@@ -461,7 +587,7 @@ async function main() {
   const sessions = [];
   let skipped = 0;
   for (const f of files) {
-    const session = parseSession(f);
+    const session = parseSession(f.path, f.source);
     if (session) {
       sessions.push(session);
     } else {
