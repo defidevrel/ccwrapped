@@ -12,7 +12,7 @@ Your year in code, visualized. A Spotify Wrapped-style experience for Claude Cod
 Run this in your terminal (requires Node.js 18+):
 
 ```bash
-npx ccwrapped
+npx @defidevrel/ccwrapped
 ```
 
 That's it. The CLI scans your local Claude Code sessions, computes your stats, and opens your wrapped page in the browser.
@@ -20,13 +20,13 @@ That's it. The CLI scans your local Claude Code sessions, computes your stats, a
 ### Options
 
 ```bash
-npx ccwrapped --dry-run    # Preview the JSON payload without uploading
-npx ccwrapped --verbose     # Show debug output
+npx @defidevrel/ccwrapped --dry-run    # Preview the JSON payload without uploading
+npx @defidevrel/ccwrapped --verbose     # Show debug output
 ```
 
 ### Manual Paste
 
-If you prefer, run `npx ccwrapped --dry-run` and paste the output JSON at [ccwrapped.com/submit](https://ccwrapped.com/submit).
+If you prefer, run `npx @defidevrel/ccwrapped --dry-run` and paste the output JSON at [ccwrapped.com/submit](https://ccwrapped.com/submit).
 
 ---
 

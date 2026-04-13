@@ -83,7 +83,7 @@ export default function Home() {
               <Card variant="terminal" className="px-5 py-3" showCorners>
                 <div className="flex items-center gap-3 font-mono text-sm">
                   <span className="text-text-muted">$</span>
-                  <code className="text-primary">npx ccwrapped</code>
+                  <code className="text-primary">npx @defidevrel/ccwrapped</code>
                 </div>
               </Card>
               <span className="text-xs text-text-muted">

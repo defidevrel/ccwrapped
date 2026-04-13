@@ -88,7 +88,7 @@ export default function SubmitPage() {
             </h1>
             <p className="text-sm text-text-secondary max-w-md">
               Run{" "}
-              <code className="text-code">npx ccwrapped --dry-run</code>{" "}
+              <code className="text-code">npx @defidevrel/ccwrapped --dry-run</code>{" "}
               to generate your stats JSON, then paste it below.
             </p>
           </div>
@@ -133,7 +133,7 @@ export default function SubmitPage() {
         <div className="mt-8 text-center">
           <p className="text-xs text-text-muted">
             Or use{" "}
-            <code className="text-code">npx ccwrapped</code>{" "}
+              <code className="text-code">npx @defidevrel/ccwrapped</code>{" "}
             to scan, submit, and open automatically — no paste needed.
           </p>
         </div>

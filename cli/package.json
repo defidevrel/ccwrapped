@@ -1,10 +1,10 @@
 {
-  "name": "ccwrapped",
+  "name": "@defidevrel/ccwrapped",
   "version": "1.0.0",
   "description": "Generate your Claude Code Wrapped — visualize your coding stats, patterns, and personality archetype",
   "type": "module",
   "bin": {
-    "ccwrapped": "./bin/ccwrapped.mjs"
+    "ccwrapped": "bin/ccwrapped.mjs"
   },
   "keywords": [
     "claude-code",
@@ -17,7 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/defidevrel/ccwrapped"
+    "url": "git+https://github.com/defidevrel/ccwrapped.git"
   },
   "engines": {
     "node": ">=18"
