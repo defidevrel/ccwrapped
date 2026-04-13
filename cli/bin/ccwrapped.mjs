@@ -10,7 +10,7 @@ import { request as httpRequest } from "http";
 const API_URL =
   process.argv.includes("--api") ?
     process.argv[process.argv.indexOf("--api") + 1] :
-    "https://ccwrapped.com";
+    "https://ccwrapped-phi.vercel.app";
 
 const DRY_RUN = process.argv.includes("--dry-run");
 const VERBOSE = process.argv.includes("--verbose");
@@ -514,7 +514,7 @@ async function main() {
   }
 
   // Step 7: Submit
-  log("Uploading to ccwrapped.com...");
+  log("Uploading your wrapped...");
 
   try {
     const result = await submitPayload(API_URL, payload);

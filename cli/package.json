@@ -1,6 +1,6 @@
 {
-  "name": "@defidevrel/ccwrapped",
-  "version": "1.0.0",
+  "name": "ccwrapped-cli",
+  "version": "1.0.1",
   "description": "Generate your Claude Code Wrapped — visualize your coding stats, patterns, and personality archetype",
   "type": "module",
   "bin": {

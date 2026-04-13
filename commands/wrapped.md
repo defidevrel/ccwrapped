@@ -220,12 +220,12 @@ Construct this exact JSON structure:
 }
 ```
 
-### Step 7: Submit to ccwrapped.com
+### Step 7: Submit to ccwrapped-phi.vercel.app
 
 POST the payload:
 
 ```bash
-curl -s -X POST "https://ccwrapped.com/api/wrapped" \
+curl -s -X POST "https://ccwrapped-phi.vercel.app/api/wrapped" \
   -H "Content-Type: application/json" \
   -d '<PAYLOAD_JSON>'
 ```
@@ -238,17 +238,17 @@ Open the wrapped page in the default browser:
 
 **macOS:**
 ```bash
-open "https://ccwrapped.com/w/<slug>"
+open "https://ccwrapped-phi.vercel.app/w/<slug>"
 ```
 
 **Linux:**
 ```bash
-xdg-open "https://ccwrapped.com/w/<slug>"
+xdg-open "https://ccwrapped-phi.vercel.app/w/<slug>"
 ```
 
 **Windows:**
 ```bash
-start "https://ccwrapped.com/w/<slug>"
+start "https://ccwrapped-phi.vercel.app/w/<slug>"
 ```
 
 ---
@@ -260,5 +260,5 @@ After completing, display:
 1. **Stats summary:** "Analyzed X sessions with Y messages across Z hours"
 2. **Archetype:** "Your archetype: [Emoji] [Name]"
 3. **Top tool:** "Your most used tool: [Tool] (N times)"
-4. **URL:** "Your wrapped is ready: https://ccwrapped.com/w/[slug]"
+4. **URL:** "Your wrapped is ready: https://ccwrapped-phi.vercel.app/w/[slug]"
 5. **Privacy note:** "Share freely - only aggregate stats are included, no private data"

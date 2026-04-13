@@ -12,7 +12,7 @@
       "author": {
         "name": "Elisha David"
       },
-      "homepage": "https://ccwrapped.com",
+      "homepage": "https://ccwrapped-phi.vercel.app",
       "repository": "https://github.com/defidevrel/ccwrapped",
       "license": "MIT",
       "keywords": ["claude-code", "wrapped", "stats", "archetype"]

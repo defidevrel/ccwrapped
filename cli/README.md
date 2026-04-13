@@ -1,11 +1,11 @@
-# @defidevrel/ccwrapped
+# ccwrapped-cli
 
 CLI tool that generates your Claude Code Wrapped — a Spotify Wrapped-style visualization of your coding stats, patterns, and personality archetype.
 
 ## Usage
 
 ```bash
-npx @defidevrel/ccwrapped
+npx ccwrapped-cli
 ```
 
 The CLI scans your local `~/.claude/projects` session files, computes aggregate stats, uploads them, and opens your wrapped page in the browser.
@@ -16,7 +16,7 @@ The CLI scans your local `~/.claude/projects` session files, computes aggregate 
 |------|-------------|
 | `--dry-run` | Preview the JSON payload without uploading |
 | `--verbose` | Show debug output during scanning |
-| `--api <url>` | Use a custom API URL (defaults to `https://ccwrapped.com`) |
+| `--api <url>` | Use a custom API URL (defaults to `https://ccwrapped-phi.vercel.app`) |
 
 ## What it does
 

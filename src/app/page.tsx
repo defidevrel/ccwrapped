@@ -83,7 +83,7 @@ export default function Home() {
               <Card variant="terminal" className="px-5 py-3" showCorners>
                 <div className="flex items-center gap-3 font-mono text-sm">
                   <span className="text-text-muted">$</span>
-                  <code className="text-primary">npx @defidevrel/ccwrapped</code>
+                  <code className="text-primary">npx ccwrapped-cli</code>
                 </div>
               </Card>
               <span className="text-xs text-text-muted">
@@ -188,7 +188,7 @@ export default function Home() {
               *not affiliated with Anthropic
             </span>
             <span className="font-mono text-xs text-text-muted">
-              ccwrapped.com
+              ccwrapped-phi.vercel.app
             </span>
           </div>
         </footer>

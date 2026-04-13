@@ -7,7 +7,7 @@ const serverEnvSchema = z.object({
 });
 
 const clientEnvSchema = z.object({
-  NEXT_PUBLIC_SITE_URL: z.string().url().default("https://ccwrapped.com"),
+  NEXT_PUBLIC_SITE_URL: z.string().url().default("https://ccwrapped-phi.vercel.app"),
 });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
