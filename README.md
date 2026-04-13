@@ -7,26 +7,26 @@ Your year in code, visualized. A Spotify Wrapped-style experience for Claude Cod
 
 ![Claude Code Wrapped Preview](og-preview.png)
 
-## Install
+## Quick Start
 
-Inside a Claude Code instance, run the following commands:
+Run this in your terminal (requires Node.js 18+):
 
-**Step 1: Add the marketplace**
-```
-/plugin marketplace add defidevrel/ccwrapped
-```
-
-**Step 2: Install the plugin**
-```
-/plugin install ccwrapped
+```bash
+npx ccwrapped
 ```
 
-**Step 3: Generate your wrapped**
-```
-/ccwrapped:wrapped
+That's it. The CLI scans your local Claude Code sessions, computes your stats, and opens your wrapped page in the browser.
+
+### Options
+
+```bash
+npx ccwrapped --dry-run    # Preview the JSON payload without uploading
+npx ccwrapped --verbose     # Show debug output
 ```
 
-Done! Your personalized wrapped page opens automatically.
+### Manual Paste
+
+If you prefer, run `npx ccwrapped --dry-run` and paste the output JSON at [ccwrapped.com/submit](https://ccwrapped.com/submit).
 
 ---
 

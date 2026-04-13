@@ -78,28 +78,23 @@ export default function Home() {
               visualized and shareable.
             </p>
 
-            {/* CTA - install commands */}
-            <div className="mt-6 flex flex-col items-center gap-3">
+            {/* CTA - run command */}
+            <div className="mt-6 flex flex-col items-center gap-4">
               <Card variant="terminal" className="px-5 py-3" showCorners>
-                <div className="flex flex-col gap-2 font-mono text-sm">
-                  <div className="flex items-center gap-3">
-                    <span className="text-text-muted text-xs">1.</span>
-                    <code className="text-text-primary">
-                      /plugin marketplace add defidevrel/ccwrapped
-                    </code>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-text-muted text-xs">2.</span>
-                    <code className="text-text-primary">
-                      /plugin install ccwrapped
-                    </code>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-text-muted text-xs">3.</span>
-                    <code className="text-primary">/ccwrapped:wrapped</code>
-                  </div>
+                <div className="flex items-center gap-3 font-mono text-sm">
+                  <span className="text-text-muted">$</span>
+                  <code className="text-primary">npx ccwrapped</code>
                 </div>
               </Card>
+              <span className="text-xs text-text-muted">
+                or{" "}
+                <a
+                  href="/submit"
+                  className="text-text-secondary underline underline-offset-4 hover:text-text-primary transition-colors"
+                >
+                  paste your JSON manually
+                </a>
+              </span>
             </div>
           </div>
         </section>
@@ -120,13 +115,13 @@ export default function Home() {
             <div className="grid border border-line sm:grid-cols-3 sm:divide-x divide-line">
               <StepCard
                 number="01"
-                title="INSTALL"
-                description="Add the plugin to Claude Code with one command"
+                title="RUN"
+                description="Run npx ccwrapped in your terminal"
               />
               <StepCard
                 number="02"
-                title="RUN"
-                description="The plugin analyzes your local session data"
+                title="SCAN"
+                description="Your local Claude Code sessions are analyzed privately"
               />
               <StepCard
                 number="03"

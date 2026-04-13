@@ -1,0 +1,28 @@
+{
+  "name": "ccwrapped",
+  "version": "1.0.0",
+  "description": "Generate your Claude Code Wrapped — visualize your coding stats, patterns, and personality archetype",
+  "type": "module",
+  "bin": {
+    "ccwrapped": "./bin/ccwrapped.mjs"
+  },
+  "keywords": [
+    "claude-code",
+    "wrapped",
+    "stats",
+    "developer-tools",
+    "cli"
+  ],
+  "author": "Elisha David",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/defidevrel/ccwrapped"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "bin/"
+  ]
+}
