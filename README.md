@@ -1,6 +1,6 @@
 # ccwrapped
 
-Your year in code, visualized. A Spotify Wrapped-style experience for Claude Code users.
+Your year in code, visualized. A Spotify Wrapped-style experience for Claude Code and Cursor users.
 
 [![License](https://img.shields.io/github/license/defidevrel/ccwrapped?v=2)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/defidevrel/ccwrapped?v=2)](https://github.com/defidevrel/ccwrapped/stargazers)
@@ -15,7 +15,7 @@ Run this in your terminal (requires Node.js 18+):
 npx ccwrapped-cli
 ```
 
-That's it. The CLI scans your local Claude Code sessions, computes your stats, and opens your wrapped page in the browser.
+That's it. The CLI scans your local **Claude Code** and **Cursor** sessions, computes your stats, and opens your wrapped page in the browser.
 
 ### Options
 
@@ -30,14 +30,14 @@ If you prefer, run `npx ccwrapped-cli --dry-run` and paste the output JSON at [c
 
 ---
 
-## What is Claude Code Wrapped?
+## What is Code Wrapped?
 
-Claude Code Wrapped analyzes your local session data and generates a shareable visualization of your coding stats, patterns, and personality archetype.
+Code Wrapped analyzes your local session data from **Claude Code** (`~/.claude/projects`) and **Cursor** (`~/.cursor/projects`) and generates a shareable visualization of your coding stats, patterns, and personality archetype.
 
 | What You Get | What It Shows |
 |--------------|---------------|
 | **Stats overview** | Sessions, messages, hours, commits, lines changed |
-| **Tool usage** | Which tools you use most (Read, Edit, Bash, etc.) |
+| **Tool usage** | Which tools you use most (Read, Edit, Shell, Bash, etc.) |
 | **Time patterns** | When you code - peak hours, busiest days |
 | **Coding archetype** | Your personality type based on usage patterns |
 | **Highlights** | Streaks, busiest day, longest session |

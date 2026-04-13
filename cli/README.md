@@ -1,6 +1,6 @@
 # ccwrapped-cli
 
-CLI tool that generates your Claude Code Wrapped — a Spotify Wrapped-style visualization of your coding stats, patterns, and personality archetype.
+CLI tool that generates your Code Wrapped — a Spotify Wrapped-style visualization of your coding stats, patterns, and personality archetype. Supports both **Claude Code** and **Cursor**.
 
 ## Usage
 
@@ -8,7 +8,7 @@ CLI tool that generates your Claude Code Wrapped — a Spotify Wrapped-style vis
 npx ccwrapped-cli
 ```
 
-The CLI scans your local `~/.claude/projects` session files, computes aggregate stats, uploads them, and opens your wrapped page in the browser.
+The CLI scans your local **Claude Code** (`~/.claude/projects`) and **Cursor** (`~/.cursor/projects`) session files, computes aggregate stats, uploads them, and opens your wrapped page in the browser.
 
 ## Options
 
@@ -20,7 +20,7 @@ The CLI scans your local `~/.claude/projects` session files, computes aggregate 
 
 ## What it does
 
-1. Discovers all session JSONL files in `~/.claude/projects`
+1. Discovers all session JSONL files in `~/.claude/projects` and `~/.cursor/projects`
 2. Parses each session for timing, message counts, tool usage, and git activity
 3. Aggregates stats across all sessions
 4. Determines your coding archetype (one of 12 types)
@@ -41,7 +41,7 @@ Only aggregate stats are collected and uploaded:
 ## Requirements
 
 - Node.js 18+
-- Claude Code installed with at least one session in `~/.claude/projects`
+- Claude Code (`~/.claude/projects`) and/or Cursor (`~/.cursor/projects`) with at least one session
 
 ## License
 
