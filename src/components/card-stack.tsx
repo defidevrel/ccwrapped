@@ -158,17 +158,19 @@ export function CardStack({ payload, slug }: CardStackProps) {
           </motion.div>
         </AnimatePresence>
 
-        {/* Tap zones: left half goes back, right half goes forward */}
-        <div className="absolute inset-0 z-10 flex">
-          <div
-            className="h-full w-1/3 cursor-pointer"
-            onClick={goPrev}
-          />
-          <div
-            className="h-full flex-1 cursor-pointer"
-            onClick={goNext}
-          />
-        </div>
+        {/* Tap zones: left goes back, right goes forward — hidden on share card so buttons work */}
+        {CARD_KEYS[currentIndex] !== "share" && (
+          <div className="absolute inset-0 z-10 flex">
+            <div
+              className="h-full w-1/3 cursor-pointer"
+              onClick={goPrev}
+            />
+            <div
+              className="h-full flex-1 cursor-pointer"
+              onClick={goNext}
+            />
+          </div>
+        )}
       </div>
 
       {/* Navigation */}
