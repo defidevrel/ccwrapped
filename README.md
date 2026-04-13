@@ -5,7 +5,7 @@ Your year in code, visualized. A Spotify Wrapped-style experience for Claude Cod
 [![License](https://img.shields.io/github/license/defidevrel/ccwrapped?v=2)](LICENSE)
 [![Stars](https://img.shields.io/github/stars/defidevrel/ccwrapped?v=2)](https://github.com/defidevrel/ccwrapped/stargazers)
 
-![Claude Code Wrapped Preview](og-preview.png)
+![Claude Code Wrapped Preview](ccwrapped.png)
 
 ## Quick Start
 
