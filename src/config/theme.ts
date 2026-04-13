@@ -2,7 +2,7 @@
  * Theme configuration for Claude Code Wrapped
  *
  * Design system: Terminal aesthetic with monochrome base
- * Coral (#E85A4F) is reserved for:
+ * Purple (#8B5CF6) is reserved for:
  * - Primary CTAs (one per screen)
  * - Key data highlights
  * - Interactive focus states
@@ -10,9 +10,9 @@
 export const THEME = {
   colors: {
     // Accent - use sparingly
-    primary: "#E85A4F",
-    primaryHover: "#F06B60",
-    primaryMuted: "rgba(232, 90, 79, 0.12)",
+    primary: "#8B5CF6",
+    primaryHover: "#A78BFA",
+    primaryMuted: "rgba(139, 92, 246, 0.12)",
 
     // Backgrounds
     background: "#050505",
@@ -49,9 +49,9 @@ export const THEME = {
   },
 
   gradients: {
-    primary: "linear-gradient(135deg, #E85A4F 0%, #F5A088 100%)",
-    glow: "radial-gradient(circle at 50% 0%, rgba(232, 90, 79, 0.12) 0%, transparent 50%)",
-    glowSubtle: "radial-gradient(circle at 50% 0%, rgba(232, 90, 79, 0.06) 0%, transparent 40%)",
+    primary: "linear-gradient(135deg, #8B5CF6 0%, #C4B5FD 100%)",
+    glow: "radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.12) 0%, transparent 50%)",
+    glowSubtle: "radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.06) 0%, transparent 40%)",
   },
 
   motion: {

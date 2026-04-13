@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        // Primary CTA - coral, use sparingly (one per screen)
+        // Primary CTA - purple, use sparingly (one per screen)
         default:
           "bg-primary text-primary-foreground hover:bg-primary-hover rounded-sm shadow-glow hover:shadow-glow-strong",
         // Terminal style - monochrome, bordered

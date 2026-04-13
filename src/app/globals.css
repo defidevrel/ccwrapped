@@ -3,9 +3,9 @@
 @theme inline {
   /*
    * Terminal Aesthetic Color System
-   * Inspired by Firecrawl/Vercel - monochrome with coral accents
+   * Monochrome with purple accents
    *
-   * CORAL USAGE RULES:
+   * PURPLE USAGE RULES:
    * - Primary CTAs only (one per screen)
    * - Key data highlights (top stat, streak number)
    * - Interactive focus states
@@ -33,12 +33,12 @@
   --color-gray-11: #999999;
   --color-gray-12: #FAFAFA;
 
-  /* Accent - Coral (use sparingly) */
-  --color-primary: #E85A4F;
-  --color-primary-hover: #F06B60;
+  /* Accent - Purple (use sparingly) */
+  --color-primary: #8B5CF6;
+  --color-primary-hover: #A78BFA;
   --color-primary-foreground: #FFFFFF;
-  --color-primary-muted: rgba(232, 90, 79, 0.12);
-  --color-primary-subtle: rgba(232, 90, 79, 0.06);
+  --color-primary-muted: rgba(139, 92, 246, 0.12);
+  --color-primary-subtle: rgba(139, 92, 246, 0.06);
 
   /* Neutrals */
   --color-muted: #1A1A1A;
@@ -89,8 +89,8 @@
   --shadow-button-pressed: inset 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-glow: 0 0 30px rgba(232, 90, 79, 0.2);
-  --shadow-glow-strong: 0 0 40px rgba(232, 90, 79, 0.35);
+  --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.2);
+  --shadow-glow-strong: 0 0 40px rgba(139, 92, 246, 0.35);
 
   /* Radii - More angular for terminal feel */
   --radius-sm: 2px;
@@ -135,7 +135,7 @@
     color: white;
   }
 
-  /* Code selection gets coral */
+  /* Code selection gets purple */
   code::selection,
   pre::selection {
     background: var(--color-primary-muted);
@@ -343,7 +343,7 @@
     color: var(--color-text-primary);
   }
 
-  /* Stat value highlight - coral for key metrics only */
+  /* Stat value highlight - purple for key metrics only */
   .stat-value-highlight {
     @apply font-bold tabular-nums font-mono;
     font-feature-settings: "tnum";
@@ -395,7 +395,7 @@
     content: "+";
   }
 
-  /* Glow effect - for coral elements only */
+  /* Glow effect - for purple elements only */
   .glow {
     box-shadow: var(--shadow-glow);
   }
@@ -405,7 +405,7 @@
   }
 
   .glow-text {
-    text-shadow: 0 0 30px rgba(232, 90, 79, 0.4);
+    text-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
   }
 
   /* Code block style */
@@ -419,10 +419,10 @@
 }
 
 @layer utilities {
-  /* Text gradient - coral only for hero */
+  /* Text gradient - purple only for hero */
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, var(--color-primary), #F5A088);
+    background-image: linear-gradient(135deg, var(--color-primary), #C4B5FD);
   }
 
   /* Structural grid pattern - Vercel style */
@@ -557,10 +557,10 @@
 /* Glow pulse - subtle */
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(232, 90, 79, 0.15);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
   }
   50% {
-    box-shadow: 0 0 35px rgba(232, 90, 79, 0.25);
+    box-shadow: 0 0 35px rgba(139, 92, 246, 0.25);
   }
 }
 

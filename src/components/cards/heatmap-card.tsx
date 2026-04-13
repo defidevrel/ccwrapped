@@ -10,7 +10,7 @@ interface HeatmapCardProps {
 }
 
 function getHeatColor(value: number, max: number, isPeak: boolean): string {
-  if (isPeak) return "#E85A4F";
+  if (isPeak) return "#8B5CF6";
   if (max === 0 || value === 0) return "#1a1a1a";
   const ratio = value / max;
   // Red shades from dark to bright

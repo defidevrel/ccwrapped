@@ -110,7 +110,7 @@ export function CardStack({ payload, slug }: CardStackProps) {
             {currentIndex + 1}/{totalCards}
           </span>
         </div>
-        {/* Progress bar - monochrome with coral for current */}
+        {/* Progress bar - monochrome with purple for current */}
         <div className="flex gap-px px-4 pb-3">
           {CARD_KEYS.map((key, i) => (
             <div
