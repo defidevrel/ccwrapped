@@ -5,6 +5,7 @@ import type { WrappedPayload } from "@/lib/types";
 import { getArchetypeDefinition } from "@/lib/archetype";
 import { Card } from "@/components/ui/card";
 import { TerminalLabel } from "@/components/ui/terminal-label";
+import { Confetti } from "@/components/confetti";
 
 interface ArchetypeCardProps {
   payload: WrappedPayload;
@@ -15,6 +16,7 @@ export function ArchetypeCard({ payload }: ArchetypeCardProps) {
 
   return (
     <div className="relative flex h-full flex-col items-center justify-center overflow-hidden px-8 text-center">
+      <Confetti />
       {/* Background glow - the archetype card gets more purple */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-1/3 left-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[150px]" />

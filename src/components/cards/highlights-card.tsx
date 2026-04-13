@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import type { WrappedPayload } from "@/lib/types";
 import { formatDate, formatNumber } from "@/lib/format";
 import { TerminalLabel } from "@/components/ui/terminal-label";
+import { getHighlightsRoast } from "@/lib/roasts";
 
 interface HighlightsCardProps {
   payload: WrappedPayload;
@@ -82,7 +83,7 @@ export function HighlightsCard({ payload }: HighlightsCardProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
       >
-        // the highlight reel
+        {getHighlightsRoast(payload)}
       </motion.p>
     </div>
   );

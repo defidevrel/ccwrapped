@@ -4,6 +4,8 @@ import { motion } from "motion/react";
 import type { WrappedPayload } from "@/lib/types";
 import { formatNumber, formatHours } from "@/lib/format";
 import { TerminalLabel } from "@/components/ui/terminal-label";
+import { AnimatedCounter } from "@/components/animated-counter";
+import { getNumbersRoast } from "@/lib/roasts";
 
 interface NumbersCardProps {
   payload: WrappedPayload;
@@ -48,13 +50,15 @@ export function NumbersCard({ payload }: NumbersCardProps) {
                 transition={{ delay: 0.1 * i, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               >
                 <span className="label text-text-muted">{stat.label}</span>
-                <span
+                <AnimatedCounter
+                  value={value}
+                  delay={0.2 + 0.15 * i}
+                  duration={1.4}
+                  format={stat.format}
                   className={`font-mono text-3xl sm:text-4xl font-bold tabular-nums ${
                     stat.highlight ? "text-primary" : "text-text-primary"
                   }`}
-                >
-                  {stat.format(value)}
-                </span>
+                />
               </motion.div>
             );
           })}
@@ -67,7 +71,7 @@ export function NumbersCard({ payload }: NumbersCardProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
       >
-        // across {payload.stats.days} active days
+        {getNumbersRoast(payload)}
       </motion.p>
     </div>
   );

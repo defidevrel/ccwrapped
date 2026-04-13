@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import type { WrappedPayload } from "@/lib/types";
 import { hourLabel, dayName } from "@/lib/format";
 import { TerminalLabel } from "@/components/ui/terminal-label";
+import { getHeatmapRoast } from "@/lib/roasts";
 
 interface HeatmapCardProps {
   payload: WrappedPayload;
@@ -115,6 +116,15 @@ export function HeatmapCard({ payload }: HeatmapCardProps) {
           })}
         </div>
       </motion.div>
+
+      <motion.p
+        className="relative z-10 mt-6 font-mono text-xs text-text-muted"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8 }}
+      >
+        {getHeatmapRoast(payload)}
+      </motion.p>
     </div>
   );
 }

@@ -4,6 +4,8 @@ import { motion } from "motion/react";
 import type { WrappedPayload } from "@/lib/types";
 import { formatNumber } from "@/lib/format";
 import { TerminalLabel } from "@/components/ui/terminal-label";
+import { AnimatedCounter } from "@/components/animated-counter";
+import { getWinsRoast } from "@/lib/roasts";
 
 interface WinsCardProps {
   payload: WrappedPayload;
@@ -66,9 +68,13 @@ export function WinsCard({ payload }: WinsCardProps) {
               </span>
               <span className="text-sm text-text-secondary">{seg.label}</span>
             </div>
-            <span className={`font-mono text-lg font-bold tabular-nums ${seg.highlight ? "text-primary" : "text-text-primary"}`}>
-              {formatNumber(seg.count)}
-            </span>
+            <AnimatedCounter
+              value={seg.count}
+              delay={0.3 + i * 0.15}
+              duration={1}
+              format={formatNumber}
+              className={`font-mono text-lg font-bold tabular-nums ${seg.highlight ? "text-primary" : "text-text-primary"}`}
+            />
           </motion.div>
         ))}
       </div>
@@ -79,7 +85,7 @@ export function WinsCard({ payload }: WinsCardProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7 }}
       >
-        // {formatNumber(totalSessions)} sessions shipped
+        {getWinsRoast(payload)}
       </motion.p>
     </div>
   );

@@ -4,6 +4,8 @@ import { motion } from "motion/react";
 import type { WrappedPayload } from "@/lib/types";
 import { formatNumber } from "@/lib/format";
 import { TerminalLabel } from "@/components/ui/terminal-label";
+import { AnimatedCounter } from "@/components/animated-counter";
+import { getToolsRoast } from "@/lib/roasts";
 
 interface ToolsCardProps {
   payload: WrappedPayload;
@@ -33,7 +35,7 @@ export function ToolsCard({ payload }: ToolsCardProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.15 }}
       >
-        <span className="font-mono text-3xl font-bold text-primary tabular-nums">{totalTools}</span>
+        <AnimatedCounter value={totalTools} delay={0.2} duration={1} className="font-mono text-3xl font-bold text-primary tabular-nums" />
         <span className="text-sm text-text-tertiary">distinct tools</span>
       </motion.div>
 
@@ -78,7 +80,7 @@ export function ToolsCard({ payload }: ToolsCardProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
       >
-        // there&apos;s a tool for that
+        {getToolsRoast(payload)}
       </motion.p>
     </div>
   );

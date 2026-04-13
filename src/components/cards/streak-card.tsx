@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import type { WrappedPayload } from "@/lib/types";
 import { formatNumber } from "@/lib/format";
 import { TerminalLabel } from "@/components/ui/terminal-label";
+import { getStreakRoast } from "@/lib/roasts";
 
 interface StreakCardProps {
   payload: WrappedPayload;
@@ -79,7 +80,7 @@ export function StreakCard({ payload }: StreakCardProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
       >
-        // consistency is the superpower
+        {getStreakRoast(payload)}
       </motion.p>
     </div>
   );
