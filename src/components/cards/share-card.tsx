@@ -22,7 +22,7 @@ export function ShareCard({ payload, slug }: ShareCardProps) {
   const [copying, setCopying] = useState(false);
   const def = getArchetypeDefinition(payload.archetype);
 
-  const shareUrl = `https://ccwrapped-phi.vercel.app/w/${slug}`;
+  const shareUrl = `https://ccwrapped.defidevrel.xyz/w/${slug}`;
   const ogImageUrl = `/api/og/${slug}`;
   const tweetText = `I'm ${def.name} ${def.emoji} - ${formatNumber(payload.stats.sessions)} sessions, ${formatNumber(payload.stats.messages)} messages, ${payload.streaks.longest}-day streak.\n\nGet your Claude Code Wrapped:`;
 
@@ -219,7 +219,7 @@ export function ShareCard({ payload, slug }: ShareCardProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        ccwrapped-phi.vercel.app
+        ccwrapped.defidevrel.xyz
       </motion.p>
     </div>
   );

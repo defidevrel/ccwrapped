@@ -1,6 +1,6 @@
 {
   "name": "ccwrapped-cli",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Generate your Claude Code Wrapped — visualize your coding stats, patterns, and personality archetype",
   "type": "module",
   "bin": {

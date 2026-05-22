@@ -188,7 +188,7 @@ export default function Home() {
               *not affiliated with Anthropic
             </span>
             <span className="font-mono text-xs text-text-muted">
-              ccwrapped-phi.vercel.app
+              ccwrapped.defidevrel.xyz
             </span>
           </div>
         </footer>

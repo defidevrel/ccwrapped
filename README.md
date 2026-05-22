@@ -26,7 +26,7 @@ npx ccwrapped-cli --verbose     # Show debug output
 
 ### Manual Paste
 
-If you prefer, run `npx ccwrapped-cli --dry-run` and paste the output JSON at [ccwrapped-phi.vercel.app/submit](https://ccwrapped-phi.vercel.app/submit).
+If you prefer, run `npx ccwrapped-cli --dry-run` and paste the output JSON at [ccwrapped.defidevrel.xyz/submit](https://ccwrapped.defidevrel.xyz/submit).
 
 ---
 
@@ -81,7 +81,7 @@ Your wrapped page is shareable - it contains only anonymous statistics.
 
 ## Tech Stack
 
-The web app at [ccwrapped-phi.vercel.app](https://ccwrapped-phi.vercel.app) is built with:
+The web app at [ccwrapped.defidevrel.xyz](https://ccwrapped.defidevrel.xyz) is built with:
 
 - **Framework:** Next.js 16 with App Router
 - **UI:** React 19, Tailwind CSS v4, Radix UI

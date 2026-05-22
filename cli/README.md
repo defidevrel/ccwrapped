@@ -27,7 +27,7 @@ node bin/ccwrapped.mjs
 |------|-------------|
 | `--dry-run` | Print the JSON payload and exit (no upload, no browser) |
 | `--verbose` | Log debug lines while scanning and parsing |
-| `--api <url>` | API origin (default: `https://ccwrapped-phi.vercel.app`). Requests go to `<url>/api/wrapped`. |
+| `--api <url>` | API origin (default: `https://ccwrapped.defidevrel.xyz`). Requests go to `<url>/api/wrapped`. |
 
 There is no config file; flags are the only CLI configuration.
 

@@ -10,7 +10,7 @@ import { request as httpRequest } from "http";
 const API_URL =
   process.argv.includes("--api") ?
     process.argv[process.argv.indexOf("--api") + 1] :
-    "https://ccwrapped-phi.vercel.app";
+    "https://ccwrapped.defidevrel.xyz";
 
 const DRY_RUN = process.argv.includes("--dry-run");
 const VERBOSE = process.argv.includes("--verbose");

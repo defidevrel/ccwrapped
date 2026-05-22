@@ -279,7 +279,7 @@ export async function GET(
               color: COLORS.textMuted,
             }}
           >
-            ccwrapped-phi.vercel.app
+            ccwrapped.defidevrel.xyz
           </div>
         </div>
 
